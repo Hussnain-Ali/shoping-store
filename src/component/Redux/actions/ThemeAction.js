@@ -1,8 +1,7 @@
 import { DARKTHEME } from "../constant/constant";
 
-export const themeChange=()=> async(dispatch)=>{
-    dispatch({
-        type:DARKTHEME,
-    });
-
+export const themeChange = () => async (dispatch) => {
+  dispatch({
+    type: DARKTHEME,
+  });
 };

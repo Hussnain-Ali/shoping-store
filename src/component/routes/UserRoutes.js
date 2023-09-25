@@ -1,37 +1,39 @@
 import React from "react";
 import UserGuard from "./RouterGuard/UserGuard";
-import Header from "../Layout/user/Header";
 
 import { Outlet } from "react-router-dom";
-import Login from "../pages/user/Login";
-import RegisterUser from "../pages/user/RegisterUser";
 import ChangePassword from "../pages/user/ChangePassword";
-const UserRoutes ={
-    path:'/',
-    element :(
+import UserProfile from "../pages/user/userProfile";
+import HeaderAuth from "../Layout/user/HeaderAuth";
+import ProductView from "../pages/productspages/ProductView";
+import Products from "../pages/productspages/Products";
+const UserRoutes = {
+  path: "/",
+  element: (
+    <UserGuard>
+      <HeaderAuth />
+      <Outlet />
+    </UserGuard>
+  ),
+  children: [
+    {
+      path: "/product",
+      element: <Products />,
+    },
+    {
+      path: "/product/:id",
+      element: <ProductView />,
+    },
+    {
+      path: "/changepassword",
+      element: <ChangePassword />,
+    },
 
-        <UserGuard>
-            <Header/>
-            <Outlet/>
-        </UserGuard>
-    ),
-    children:[
-        {
-            path:'/login',
-            element:<Login/>
-        },
-        {
-            path:'/register',
-            element:<RegisterUser/>
-        },
-        {
-            path:'/changepassword',
-            element:<ChangePassword/>
-        },
-
-
-    ]
+    {
+      path: "/userprofile",
+      element: <UserProfile />,
+    },
+  ],
 };
 
 export default UserRoutes;
-
