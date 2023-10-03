@@ -55,7 +55,7 @@ function MainListItems() {
           <MenuItem onClick={handleOrderCloseMenu}>Order Status</MenuItem>
         </Menu>
       </ListItemButton>
-      <ListItemButton>
+      <ListItemButton component={Link} to="/addproduct">
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>

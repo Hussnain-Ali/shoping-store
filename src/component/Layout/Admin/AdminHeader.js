@@ -149,7 +149,9 @@ function AdminHeader() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp">{userData.firstName[0]}</Avatar>
+                <Avatar alt="Remy Sharp">
+                  {userData.firstName[0].toUpperCase()}
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -168,26 +170,15 @@ function AdminHeader() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting, index) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  {index === 0 ? (
-                    <Link to="/userprofile">
-                      <Typography textAlign="center">{setting}</Typography>
-                    </Link>
-                  ) : index === 1 ? (
-                    <Link to="/changepassword">
-                      <Typography textAlign="center">{setting}</Typography>
-                    </Link>
-                  ) : index === 3 ? (
-                    <Typography onClick={handleLogout} textAlign="center">
-                      {setting}
-                    </Typography>
-                  ) : (
-                    <Typography textAlign="center">{setting}</Typography>
-                  )}
-                </MenuItem>
-              ))}
-              ;
+              <MenuItem component={Link} to="/userprofile">
+                <Typography>My Profile</Typography>
+              </MenuItem>
+              <MenuItem component={Link} to="/changepassword">
+                <Typography>Change Password</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleLogout}>
+                <Typography>Logout</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

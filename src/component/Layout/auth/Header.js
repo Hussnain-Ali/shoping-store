@@ -16,7 +16,7 @@ import { useSelector } from "react-redux";
 const pages = ["Products", "Pricing", "Blog"];
 
 function Header() {
-  const data = useSelector((d) => d.auth.user);
+  const data = useSelector((d) => d.auth.userData);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   // const [anchorElUser, setAnchorElUser] = React.useState(null);
 

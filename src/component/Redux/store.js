@@ -11,7 +11,9 @@ import registrationReducer from "./reducers/registerReducer";
 import productReducer from "./reducers/productReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import categoryReducer from "../../component2/subAdminReducers/addCategoryReducer";
+import addProductReducer from "../../component2/subAdminReducers/addProductReducer";
 import cartReducer from "./reducers/cartReducer";
+import userProfile from "./reducers/userProfileReducer";
 const rootReducer = combineReducers({
   themeChange: themeChange,
   auth: authReducer,
@@ -20,6 +22,8 @@ const rootReducer = combineReducers({
   products: productReducer,
   categoryReducer: categoryReducer,
   cartReducer,
+  userProfile: userProfile,
+  addProductReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userData")

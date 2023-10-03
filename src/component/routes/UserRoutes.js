@@ -7,6 +7,7 @@ import UserProfile from "../pages/user/userProfile";
 import HeaderAuth from "../Layout/user/HeaderAuth";
 import ProductView from "../pages/productspages/ProductView";
 import Products from "../pages/productspages/Products";
+import ViewCart from "../pages/user/ViewCart";
 const UserRoutes = {
   path: "/",
   element: (
@@ -32,6 +33,10 @@ const UserRoutes = {
     {
       path: "/userprofile",
       element: <UserProfile />,
+    },
+    {
+      path: "/viewcart",
+      element: <ViewCart />,
     },
   ],
 };

@@ -151,6 +151,8 @@ function HeaderAuth() {
               aria-label="Shopping Cart"
               color="inherit"
               sx={{ marginRight: 2 }}
+              component={Link}
+              to="/viewcart"
             >
               <Badge badgeContent={totalItems} color="warning" showZero>
                 <ShoppingCartIcon />
@@ -158,7 +160,9 @@ function HeaderAuth() {
             </IconButton>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp">
+                  {data.firstName[0].toUpperCase()}
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu

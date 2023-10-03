@@ -34,3 +34,12 @@ export const FETCH_PRODUCT_FAIL = "FETCH_PRODUCT_FAIL";
 
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+
+///increment and decrement items in cart//
+export const INCREMENT_ITEMS = "INCREMENT_ITEMS";
+export const DECREMENT_ITEMS = "DECREMENT_ITEMS";
+
+///get user profile constant////////////////
+
+export const FETCH_USER_PROFILE_SUCCESS = "FETCH_USER_PROFILE_SUCCESS";
+export const FETCH_USER_PROFILE_FAIL = "FETCH_USER_PROFILE_FAIL";

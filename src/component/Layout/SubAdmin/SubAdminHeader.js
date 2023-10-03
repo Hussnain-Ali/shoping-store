@@ -149,7 +149,9 @@ function SubAdminHeader() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp">{userData.firstName[0]}</Avatar>
+                <Avatar alt="Remy Sharp">
+                  {userData.firstName[0].toUpperCase()}
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu

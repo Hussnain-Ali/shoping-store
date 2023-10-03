@@ -41,10 +41,6 @@ const CategoryPage = () => {
     initialValues,
     validationSchema: addCategorySchema,
     onSubmit: (values) => {
-      const formData = new FormData();
-      formData.append("name", values.name);
-      formData.append("image", values.image);
-      console.log("formData before dispatch:", formData);
       dispatch(addCategory(values));
     },
   });
@@ -93,6 +89,7 @@ const CategoryPage = () => {
               style={{ display: "none" }}
               id="image-input"
               onInput={handleFileChange}
+              onBlur={handleBlur}
               name="image" // Make sure name matches the field name
             />
             <label htmlFor="image-input">
@@ -117,7 +114,7 @@ const CategoryPage = () => {
               variant="contained"
               color="primary"
               style={{ marginTop: "10px" }}
-              onSubmit={handleSubmit}
+              onClick={handleSubmit}
             >
               Add Category
             </Button>

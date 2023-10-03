@@ -20,16 +20,17 @@ export const deleteCategorySuccess = (categoryId) => ({
   payload: categoryId,
 });
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZmY0ZDE4ZGIxODIwOTVmNzIzMmE5YSIsImlhdCI6MTY5NTI5ODk2MywiZXhwIjoxNjk3ODkwOTYzfQ.WE69Nz_e5ppPyzzFO_y-V2p5HLUxbd6-jLLm2Np0cgM";
-const config = {
-  headers: {
-    "Content-Type": "application/json",
-    token: token,
-  },
-};
 export const fetchCategories = () => async (dispatch) => {
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZmY0ZDE4ZGIxODIwOTVmNzIzMmE5YSIsImlhdCI6MTY5NTI5ODk2MywiZXhwIjoxNjk3ODkwOTYzfQ.WE69Nz_e5ppPyzzFO_y-V2p5HLUxbd6-jLLm2Np0cgM";
+
   try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        token: token,
+      },
+    };
     await axios
       .get("http://localhost:4000/admin/getCategories", config)
       .then((response) => {
@@ -43,10 +44,24 @@ export const fetchCategories = () => async (dispatch) => {
 export const addCategory =
   ({ name, image }) =>
   async (dispatch) => {
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZmY0ZDE4ZGIxODIwOTVmNzIzMmE5YSIsImlhdCI6MTY5NTI5ODk2MywiZXhwIjoxNjk3ODkwOTYzfQ.WE69Nz_e5ppPyzzFO_y-V2p5HLUxbd6-jLLm2Np0cgM";
+
     try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          token: token,
+        },
+      };
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("file", image);
+      console.log("🚀 ~ file: addCategoryAction.js:48 ~ formData:", formData);
+
       const response = await axios.post(
         "http://localhost:4000/admin/addCategory",
-        { name, file: image },
+        formData,
         config
       );
       dispatch(addCategorySuccess(response.data));

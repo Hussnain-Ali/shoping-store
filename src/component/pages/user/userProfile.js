@@ -14,9 +14,17 @@ import {
 } from "@mui/material";
 
 import { Edit as EditIcon, Person as PersonIcon } from "@mui/icons-material";
-
-const number = [1, 2, 3, 4, 5];
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchUserProfile } from "../../Redux/actions/userProfileAction";
 const UserProfile = () => {
+  const dispatch = useDispatch();
+  const selector = useSelector((state) => state.userProfile.profile);
+  console.log(selector, "hhh");
+  useEffect(() => {
+    dispatch(fetchUserProfile());
+  }, [dispatch]);
+
   return (
     <Container>
       <Paper style={{ padding: "10px", marginTop: "20px" }}>
@@ -34,7 +42,7 @@ const UserProfile = () => {
               </Avatar>
             </Grid>
             <Grid item sx={{ color: "#1976d2" }} margin={2}>
-              <Typography variant="h4">John Doe</Typography>
+              <Typography variant="h4">{selector.firstName}</Typography>
               <Typography variant="subtitle1">Web Developer</Typography>
             </Grid>
           </Grid>
@@ -49,18 +57,30 @@ const UserProfile = () => {
                 }}
               >
                 <List component="nav" aria-label="main mailbox folders">
-                  {number.map((index, value) => (
-                    <ListItem sx={{ padding: 2 }} key={index}>
-                      <ListItemText sx={{ mr: 10 }}>
-                        First Name,{value}
-                      </ListItemText>
-                      <Typography sx={{ mr: 5 }}>Hussnain</Typography>
-                      <Button>
-                        <EditIcon />
-                      </Button>
-                      <Divider />
-                    </ListItem>
-                  ))}
+                  <ListItem sx={{ padding: 2 }}>
+                    <ListItemText sx={{ mr: 10 }}>First Name:</ListItemText>
+                    <Typography sx={{ mr: 5 }}>{selector.firstName}</Typography>
+                    <Button>
+                      <EditIcon />
+                    </Button>
+                    <Divider />
+                  </ListItem>
+                  <ListItem sx={{ padding: 2 }}>
+                    <ListItemText sx={{ mr: 10 }}>Second Name:</ListItemText>
+                    <Typography sx={{ mr: 5 }}>{selector.lastName}</Typography>
+                    <Button>
+                      <EditIcon />
+                    </Button>
+                    <Divider />
+                  </ListItem>
+                  <ListItem sx={{ padding: 2 }}>
+                    <ListItemText sx={{ mr: 10 }}>Email:</ListItemText>
+                    <Typography sx={{ mr: 5 }}>{selector.email}</Typography>
+                    <Button>
+                      <EditIcon />
+                    </Button>
+                    <Divider />
+                  </ListItem>
                 </List>
               </Box>
             </Grid>

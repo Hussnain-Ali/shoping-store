@@ -9,6 +9,7 @@ import {
   Button,
   CardActions,
 } from "@mui/material";
+
 import { useEffect } from "react";
 import { fetchProduct } from "../../Redux/actions/fetchProductAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,8 +22,8 @@ const Products = () => {
     dispatch(fetchProduct());
   }, [dispatch]);
 
-  const handleViewClick = (productId) => {
-    navigate(`/product/${productId}`);
+  const handleViewClick = (id) => {
+    navigate(`/product/${id}`);
   };
   return (
     <Container sx={{ py: 8 }} maxWidth="md">
@@ -40,6 +41,7 @@ const Products = () => {
                 }}
                 image={card.productImage}
               />
+              <img src={card.productImage} />
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography gutterBottom variant="h5" component="h2">
                   Name:{card.name}

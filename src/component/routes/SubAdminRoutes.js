@@ -7,6 +7,7 @@ import Products from "../pages/productspages/Products";
 import ProductView from "../pages/productspages/ProductView";
 import UserProfile from "../pages/user/userProfile";
 import CategoryPage from "../../component2/Category/AddCategory";
+import AddProduct from "../../component2/Products/AddProducts";
 
 const SubAdminRoutes = {
   path: "/",
@@ -36,6 +37,10 @@ const SubAdminRoutes = {
     {
       path: "/addcategory",
       element: <CategoryPage />,
+    },
+    {
+      path: "/addproduct",
+      element: <AddProduct />,
     },
   ],
 };
