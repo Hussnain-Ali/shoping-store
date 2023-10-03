@@ -39,7 +39,7 @@ const Login = () => {
   });
   useEffect(() => {
     if (userData) {
-      navigate("/");
+      navigate("/product");
     }
   }, [userData]);
 

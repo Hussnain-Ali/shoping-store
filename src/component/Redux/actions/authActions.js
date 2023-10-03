@@ -20,7 +20,6 @@ export const loginFail = (error) => ({
 });
 
 export const login = ({ values, navigate }) => {
-  console.log(values);
   return async (dispatch) => {
     dispatch(loginRequest());
 

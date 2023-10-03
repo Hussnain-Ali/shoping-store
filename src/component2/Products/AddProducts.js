@@ -1,24 +1,36 @@
-import React from "react";
-import { Container, TextField, Button, Grid, Typography } from "@mui/material";
+import React, { useEffect } from "react";
+import {
+  Container,
+  TextField,
+  Button,
+  Grid,
+  Typography,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import { useFormik } from "formik";
 import { addProductSchema } from "../Schema/addProductSchema";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../SubAdminActions/addProductAction";
-const initialValues = {
-  name: "",
-  description: "",
-  price: 0,
-  stock: 0,
-  file: null,
-};
+import { fetchCategories } from "../SubAdminActions/addCategoryAction";
+
 const AddProduct = () => {
   const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categoryReducer.categories);
+  const initialValues = {
+    name: "",
+    description: "",
+    price: "",
+    stock: "",
+    file: null,
+    categoryId: "",
+  };
   const formik = useFormik({
     initialValues,
     validationSchema: addProductSchema,
     onSubmit: (values) => {
       console.log(values);
-
       dispatch(addProduct(values));
     },
   });
@@ -36,6 +48,9 @@ const AddProduct = () => {
     const selectedFile = event.target.files[0];
     setFieldValue("file", selectedFile);
   };
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, []);
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
@@ -54,7 +69,7 @@ const AddProduct = () => {
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <TextField
               fullWidth
               label="Description"
@@ -64,6 +79,22 @@ const AddProduct = () => {
               onBlur={handleBlur}
               onChange={handleChange}
             />
+          </Grid>
+          <Grid item xs={6}>
+            <Select
+              fullWidth
+              name="categoryId"
+              value={values.categoryId}
+              onChange={handleChange}
+              placeholder="Select Category "
+              onBlur={handleBlur}
+            >
+              {categories.map((d) => (
+                <MenuItem key={d._id} value={d._id}>
+                  {d.name}
+                </MenuItem>
+              ))}
+            </Select>
           </Grid>
           <Grid item xs={6}>
             <TextField

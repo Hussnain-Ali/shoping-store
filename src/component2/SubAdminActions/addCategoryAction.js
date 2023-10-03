@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import {
   FETCH_CATEGORY_SUCCESS,
   ADD_CATEGORY_SUCCESS,
@@ -46,7 +47,6 @@ export const addCategory =
   async (dispatch) => {
     const token =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZmY0ZDE4ZGIxODIwOTVmNzIzMmE5YSIsImlhdCI6MTY5NTI5ODk2MywiZXhwIjoxNjk3ODkwOTYzfQ.WE69Nz_e5ppPyzzFO_y-V2p5HLUxbd6-jLLm2Np0cgM";
-
     try {
       const config = {
         headers: {
@@ -57,16 +57,16 @@ export const addCategory =
       const formData = new FormData();
       formData.append("name", name);
       formData.append("file", image);
-      console.log("🚀 ~ file: addCategoryAction.js:48 ~ formData:", formData);
 
       const response = await axios.post(
         "http://localhost:4000/admin/addCategory",
         formData,
         config
       );
-      dispatch(addCategorySuccess(response.data));
+      toast.success(response.data);
+      dispatch(fetchCategories());
     } catch (error) {
-      return error.message;
+      toast.error(error.response.data.message);
     }
   };
 

@@ -5,6 +5,8 @@ import AuthRoutes from "./AuthRoutes";
 import AdminRoutes from "./AdminRoutes";
 import SubAdminRoutes from "./SubAdminRoutes";
 export default function ThemeRoutes() {
+  const selector = useSelector((state) => state.themeChange);
+
   const routes = [];
 
   const userData = useSelector((user) => user.auth.userData);
