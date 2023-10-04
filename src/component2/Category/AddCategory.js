@@ -20,13 +20,15 @@ import {
   addCategory,
   deleteCategory,
 } from "../SubAdminActions/addCategoryAction";
+import { toast } from "react-toastify";
 
 const initialValues = {
   name: "",
   image: null,
 };
 const CategoryPage = () => {
-  const categories = useSelector((state) => state.categoryReducer.categories);
+  const categoriess = useSelector((state) => state.categoryReducer);
+  const { categories, error, loading } = categoriess;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,10 +42,14 @@ const CategoryPage = () => {
   const formik = useFormik({
     initialValues,
     validationSchema: addCategorySchema,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       dispatch(addCategory(values));
+      if (error !== null) {
+        resetForm();
+      }
     },
   });
+
   const {
     values,
     handleBlur,
@@ -53,11 +59,12 @@ const CategoryPage = () => {
     touched,
     setFieldValue,
   } = formik;
-
+  if (values == null) {
+    toast.error("categories.error");
+  }
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     setFieldValue("image", selectedFile);
-    console.log("values.image:", values.image);
   };
   return (
     <form>
@@ -92,6 +99,9 @@ const CategoryPage = () => {
               onBlur={handleBlur}
               name="image" // Make sure name matches the field name
             />
+            {errors.image && touched.image ? (
+              <Typography color={"#ef6c55"}>{errors.image}</Typography>
+            ) : null}
             <label htmlFor="image-input">
               <TextField
                 sx={{ marginTop: 2 }}

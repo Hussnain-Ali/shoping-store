@@ -8,6 +8,8 @@ import ProductView from "../pages/productspages/ProductView";
 import UserProfile from "../pages/user/userProfile";
 import CategoryPage from "../../component2/Category/AddCategory";
 import AddProduct from "../../component2/Products/AddProducts";
+import ChangePassword from "../pages/user/ChangePassword";
+import UpdateProfile from "../pages/user/UpdateProfile";
 
 const SubAdminRoutes = {
   path: "/",
@@ -33,6 +35,14 @@ const SubAdminRoutes = {
     {
       path: "/userprofile",
       element: <UserProfile />,
+    },
+    {
+      path: "/updateprofile",
+      element: <UpdateProfile />,
+    },
+    {
+      path: "/changepassword",
+      element: <ChangePassword />,
     },
     {
       path: "/addcategory",

@@ -4,6 +4,7 @@ import {
   FETCH_CATEGORY_SUCCESS,
   ADD_CATEGORY_SUCCESS,
   DELETE_CATEGORY_SUCCESS,
+  ADD_CATEGORY_FAIL,
 } from "../constants/constant";
 
 export const fetchCategoriesSuccess = (categories) => ({
@@ -14,6 +15,10 @@ export const fetchCategoriesSuccess = (categories) => ({
 export const addCategorySuccess = (category) => ({
   type: ADD_CATEGORY_SUCCESS,
   payload: category,
+});
+export const addCategoryFail = (error) => ({
+  type: ADD_CATEGORY_FAIL,
+  payload: error,
 });
 
 export const deleteCategorySuccess = (categoryId) => ({
@@ -67,13 +72,24 @@ export const addCategory =
       dispatch(fetchCategories());
     } catch (error) {
       toast.error(error.response.data.message);
+      dispatch(addCategoryFail(error.response.data.message));
     }
   };
 
 export const deleteCategory = (categoryId) => async (dispatch) => {
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZmY0ZDE4ZGIxODIwOTVmNzIzMmE5YSIsImlhdCI6MTY5NTI5ODk2MywiZXhwIjoxNjk3ODkwOTYzfQ.WE69Nz_e5ppPyzzFO_y-V2p5HLUxbd6-jLLm2Np0cgM";
+
   try {
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        token: token,
+      },
+    };
     await axios.delete(
-      `http://localhost:4000/admin/getCategories/${categoryId}`
+      `http://localhost:4000/admin/getCategories/${categoryId}`,
+      config
     );
     dispatch(deleteCategorySuccess(categoryId));
   } catch (error) {

@@ -29,6 +29,7 @@ const Login = () => {
   const selector = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const { loading, error, userData } = selector;
+  console.log(userData, "hjhj");
   const formik = useFormik({
     initialValues,
     validationSchema: loginSchema,

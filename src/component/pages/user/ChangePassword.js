@@ -15,7 +15,7 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 const initialValues = {
-  currentPassword: "",
+  password: "",
   newPassword: "",
   confirmPassword: "",
 };
@@ -28,11 +28,10 @@ const ChangePassword = () => {
     initialValues,
     validationSchema: ChangePassSchema,
     onSubmit: (values, action) => {
-      console.log("🚀 ~ file: Login.js:29 ~ Login ~ values:", values);
       dispatch(changePassword(values));
-      action.resetForm();
     },
   });
+
   const { values, handleBlur, handleSubmit, handleChange, errors, touched } =
     formik;
 
@@ -59,19 +58,17 @@ const ChangePassword = () => {
               margin="normal"
               required
               fullWidth
-              name="currentPassword"
+              name="password"
               label="Current Password"
               type="password"
-              id="currentPassword"
+              id="password"
               autoComplete="current-password"
-              value={values.currentPassword}
+              value={values.password}
               onBlur={handleBlur}
               onChange={handleChange}
             />
-            {errors.currentPassword && touched.currentPassword ? (
-              <Typography color={"#ef6c55"}>
-                {errors.currentPassword}
-              </Typography>
+            {errors.password && touched.password ? (
+              <Typography color={"#ef6c55"}>{errors.password}</Typography>
             ) : null}
             <TextField
               margin="normal"

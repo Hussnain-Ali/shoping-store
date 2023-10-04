@@ -29,9 +29,10 @@ const AddProduct = () => {
   const formik = useFormik({
     initialValues,
     validationSchema: addProductSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       console.log(values);
       dispatch(addProduct(values));
+      resetForm();
     },
   });
   const {
@@ -68,6 +69,9 @@ const AddProduct = () => {
               onBlur={handleBlur}
               onChange={handleChange}
             />
+            {errors.name && touched.name ? (
+              <Typography color={"#ef6c55"}>{errors.name}</Typography>
+            ) : null}
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -79,6 +83,9 @@ const AddProduct = () => {
               onBlur={handleBlur}
               onChange={handleChange}
             />
+            {errors.description && touched.description ? (
+              <Typography color={"#ef6c55"}>{errors.description}</Typography>
+            ) : null}
           </Grid>
           <Grid item xs={6}>
             <Select
@@ -95,6 +102,9 @@ const AddProduct = () => {
                 </MenuItem>
               ))}
             </Select>
+            {errors.categoryId && touched.categoryId ? (
+              <Typography color={"#ef6c55"}>{errors.categoryId}</Typography>
+            ) : null}
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -107,6 +117,9 @@ const AddProduct = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
+            {errors.stock && touched.stock ? (
+              <Typography color={"#ef6c55"}>{errors.stock}</Typography>
+            ) : null}
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -119,6 +132,9 @@ const AddProduct = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
+            {errors.price && touched.price ? (
+              <Typography color={"#ef6c55"}>{errors.price}</Typography>
+            ) : null}
           </Grid>
           <Grid item xs={12}>
             <input
@@ -130,6 +146,9 @@ const AddProduct = () => {
               onBlur={handleBlur}
               onInput={handleFileChange}
             />
+            {errors.file && touched.file ? (
+              <Typography color={"#ef6c55"}>{errors.file}</Typography>
+            ) : null}
             <label htmlFor="fileInput">
               <TextField
                 sx={{ marginTop: 2 }}
@@ -139,6 +158,7 @@ const AddProduct = () => {
                 value={values.image ? values.image.name : ""}
                 placeholder="Image"
               ></TextField>
+
               <Button
                 variant="contained"
                 component="span"

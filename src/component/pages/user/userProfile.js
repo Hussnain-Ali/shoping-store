@@ -17,13 +17,16 @@ import { Edit as EditIcon, Person as PersonIcon } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchUserProfile } from "../../Redux/actions/userProfileAction";
+import { Link } from "react-router-dom";
 const UserProfile = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state.userProfile.profile);
-  console.log(selector, "hhh");
   useEffect(() => {
     dispatch(fetchUserProfile());
   }, [dispatch]);
+  if (selector === null) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <Container>
@@ -60,28 +63,32 @@ const UserProfile = () => {
                   <ListItem sx={{ padding: 2 }}>
                     <ListItemText sx={{ mr: 10 }}>First Name:</ListItemText>
                     <Typography sx={{ mr: 5 }}>{selector.firstName}</Typography>
-                    <Button>
-                      <EditIcon />
-                    </Button>
+
                     <Divider />
                   </ListItem>
                   <ListItem sx={{ padding: 2 }}>
                     <ListItemText sx={{ mr: 10 }}>Second Name:</ListItemText>
                     <Typography sx={{ mr: 5 }}>{selector.lastName}</Typography>
-                    <Button>
-                      <EditIcon />
-                    </Button>
+
                     <Divider />
                   </ListItem>
                   <ListItem sx={{ padding: 2 }}>
                     <ListItemText sx={{ mr: 10 }}>Email:</ListItemText>
                     <Typography sx={{ mr: 5 }}>{selector.email}</Typography>
-                    <Button>
-                      <EditIcon />
-                    </Button>
+
                     <Divider />
                   </ListItem>
                 </List>
+
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  component={Link}
+                  to="/updateprofile"
+                >
+                  Edit Profile
+                </Button>
               </Box>
             </Grid>
           </Grid>

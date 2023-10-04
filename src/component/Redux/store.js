@@ -14,6 +14,7 @@ import categoryReducer from "../../component2/subAdminReducers/addCategoryReduce
 import addProductReducer from "../../component2/subAdminReducers/addProductReducer";
 import cartReducer from "./reducers/cartReducer";
 import userProfile from "./reducers/userProfileReducer";
+import updateProfileReducer from "./reducers/updateProfileReducer";
 const rootReducer = combineReducers({
   themeChange: themeChange,
   auth: authReducer,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   cartReducer,
   userProfile: userProfile,
   addProductReducer,
+  updateProfileReducer: updateProfileReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userData")
