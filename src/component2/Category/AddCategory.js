@@ -36,6 +36,7 @@ const CategoryPage = () => {
   }, [dispatch]);
 
   const handleDeleteCategory = (categoryId) => {
+    console.log(categoryId, "kkk");
     dispatch(deleteCategory(categoryId));
   };
 
@@ -150,7 +151,7 @@ const CategoryPage = () => {
                         <Button
                           variant="outlined"
                           color="secondary"
-                          onClick={() => handleDeleteCategory(category.id)}
+                          onClick={() => handleDeleteCategory(category._id)}
                         >
                           Delete
                         </Button>

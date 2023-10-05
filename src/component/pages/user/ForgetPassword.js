@@ -27,10 +27,6 @@ const ForgetPassword = () => {
     initialValues,
     validationSchema: forgotpassSchema,
     onSubmit: (values, action) => {
-      console.log(
-        "🚀 ~ file: ForgetPassword.js:26 ~ ForgetPassword ~ values:",
-        values
-      );
       dispatch(forgotPassword(values));
       action.resetForm();
     },

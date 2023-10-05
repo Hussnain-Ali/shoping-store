@@ -4,9 +4,10 @@ import {
   FETCH_PRODUCT_FAIL,
 } from "../constant/constant";
 
-export const fetchProductSuccess = (product) => ({
+export const fetchProductSuccess = (product, totalPages) => ({
   type: FETCH_PRODUCT_SUCCESS,
   payload: product,
+  totalPages,
 });
 
 export const fetchProductFail = (error) => ({
@@ -14,10 +15,10 @@ export const fetchProductFail = (error) => ({
   payload: error,
 });
 
-export const fetchProduct = () => {
+export const fetchProduct = (page, pageSize) => {
   return (dispatch) => {
     axios
-      .get("http://localhost:4000/product")
+      .get(`http://localhost:4000/product?page=${page}&pageSize=${pageSize}`)
       .then((response) => {
         dispatch(fetchProductSuccess(response.data));
       })

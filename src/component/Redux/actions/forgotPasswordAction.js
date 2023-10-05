@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import {
   FORGOT_PASSWORD_REQUEST,
   FORGOT_PASSWORD_SUCCESS,
@@ -22,10 +23,14 @@ export const requestFail = (error) => ({
 export const forgotPassword = ({ email }) => {
   return async (dispatch) => {
     dispatch(requestSnd());
+    const userDataString = localStorage.getItem("userData");
+    const userData = userDataString ? JSON.parse(userDataString) : null;
+    const token = userData && userData.token;
     try {
       const config = {
         headers: {
           "Content-Type": "application/json",
+          token,
         },
       };
 
@@ -35,13 +40,12 @@ export const forgotPassword = ({ email }) => {
         config
       );
       const userEmail = response.data;
-      console.log(
-        "🚀 ~ file: forgotPasswordAction.js:41 ~ returnasync ~ userEmail:",
-        userEmail
-      );
+
       dispatch(requestSuccess(userEmail));
+      toast.success(response.data);
     } catch (error) {
-      dispatch(requestFail(error.message));
+      dispatch(requestFail(error.response.data.message));
+      toast.error(error.response.data.message);
     }
   };
 };

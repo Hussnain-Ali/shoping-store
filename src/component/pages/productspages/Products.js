@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Container,
   Typography,
@@ -8,9 +7,10 @@ import {
   CardMedia,
   Button,
   CardActions,
+  Box,
 } from "@mui/material";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchProduct } from "../../Redux/actions/fetchProductAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -18,9 +18,15 @@ const Products = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.product);
+  console.log(products.length);
+  const currentPage = useSelector((state) => state.products.currentPage);
+  const pageSize = useSelector((state) => state.products.pageSize);
+  const [page, setPage] = useState(1);
+  const totalPages = Math.ceil(products.length / pageSize);
+
   useEffect(() => {
-    dispatch(fetchProduct());
-  }, [dispatch]);
+    dispatch(fetchProduct(page, pageSize));
+  }, [dispatch, page, pageSize]);
 
   const handleViewClick = (id) => {
     navigate(`/product/${id}`);
@@ -37,11 +43,14 @@ const Products = () => {
                 component="div"
                 sx={{
                   // 16:9
-                  pt: "56.25%",
+                  pt: "25.25%",
                 }}
                 image={card.productImage}
               />
-              <img src={card.productImage} />
+              <img
+                src={card.productImage}
+                style={{ height: "200px", width: "100%" }}
+              />
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography gutterBottom variant="h5" component="h2">
                   Name:{card.name}
@@ -60,6 +69,26 @@ const Products = () => {
           </Grid>
         ))}
       </Grid>
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        sx={{ marginTop: 5 }}
+      >
+        <Button
+          onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </Button>
+        <span>Page {currentPage}</span>
+        <Button
+          onClick={() => setPage((prevPage) => prevPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </Button>
+      </Box>
     </Container>
   );
 };

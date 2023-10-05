@@ -87,12 +87,14 @@ export const deleteCategory = (categoryId) => async (dispatch) => {
         token: token,
       },
     };
-    await axios.delete(
-      `http://localhost:4000/admin/getCategories/${categoryId}`,
+    const response = await axios.delete(
+      `http://localhost:4000/admin/removeCateogry/${categoryId}`,
       config
     );
     dispatch(deleteCategorySuccess(categoryId));
+    toast.success(response.data.message);
   } catch (error) {
+    toast.error(error.response.data.message);
     return error.message;
   }
 };

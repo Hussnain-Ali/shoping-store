@@ -96,14 +96,19 @@ function SubAdminHeader() {
                 display: { xs: "block", md: "none" },
               }}
             >
+              <MenuItem
+                onClick={handleCloseNavMenu}
+                component={Link}
+                to="/subAdminDashboard"
+              >
+                <Typography textAlign={"center"}>DashBoard</Typography>
+              </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <Link to="/product">
                   <Typography textAlign={"center"}>Product</Typography>
                 </Link>
               </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign={"center"}>Product</Typography>
-              </MenuItem>
+
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign={"center"}>Product</Typography>
               </MenuItem>

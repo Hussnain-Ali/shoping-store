@@ -1,5 +1,14 @@
 import React from "react";
-import { Container, Typography, Button } from "@mui/material";
+import {
+  Container,
+  Typography,
+  Button,
+  Card,
+  CardMedia,
+  CardContent,
+  Grid,
+  CardActions,
+} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchProduct } from "../../Redux/actions/fetchProductAction";
@@ -30,29 +39,42 @@ const ProductView = () => {
   };
   return (
     <Container maxWidth="md">
-      <Typography variant="h4" gutterBottom>
-        {productdetail.name}
-      </Typography>
-
-      <Typography variant="h6" gutterBottom>
-        Description:
-      </Typography>
-      <Typography variant="body1" paragraph>
-        {productdetail.description}
-      </Typography>
-      <Typography variant="h6" gutterBottom>
-        Price: ${productdetail.price}
-      </Typography>
-      <Typography variant="h6" gutterBottom>
-        Stock: {productdetail.stock}
-      </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => handleAddToCart(productdetail._id)}
-      >
-        Add to Cart
-      </Button>
+      <Grid container spacing={4}>
+        <Grid item key={productdetail._id} xs={8} sm={8} md={8}>
+          <Card
+            sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+          >
+            <CardMedia
+              component="div"
+              sx={{
+                // 16:9
+                pt: "25.25%",
+              }}
+              image={productdetail.productImage}
+            />
+            <img
+              src={productdetail.productImage}
+              style={{ height: "200px", width: "100%" }}
+            />
+            <CardContent sx={{ flexGrow: 1 }}>
+              <Typography gutterBottom variant="h5" component="h2">
+                Name:{productdetail.name}
+              </Typography>
+              <Typography>Desc:{productdetail.description}</Typography>
+              <Typography>Price:${productdetail.price}</Typography>
+              <Typography>Stock:{productdetail.stock}</Typography>
+            </CardContent>
+            <CardActions>
+              <Button
+                onClick={() => handleAddToCart(productdetail._id)}
+                size="small"
+              >
+                ADD TO CART
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
+      </Grid>
     </Container>
   );
 };

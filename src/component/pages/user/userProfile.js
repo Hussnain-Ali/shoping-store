@@ -41,7 +41,11 @@ const UserProfile = () => {
           <Grid display="flex" alignItems="flex-start" marginRight={15}>
             <Grid item alignItems={"flex-start"}>
               <Avatar sx={{ width: 100, height: 100, bgcolor: "#1976d2" }}>
-                <PersonIcon />
+                <img
+                  src={selector.profileImage}
+                  alt="profileImage"
+                  style={{ width: "100px", height: "100px" }}
+                />
               </Avatar>
             </Grid>
             <Grid item sx={{ color: "#1976d2" }} margin={2}>
